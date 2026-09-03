@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy - Organizo</title>
+  <meta name="description" content="Privacy Policy for the Organizo mobile application and website." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0F9D58;
+      --primary-hover: #0b8043;
+      --primary-light: rgba(15, 157, 88, 0.12);
+      --primary-glow: rgba(15, 157, 88, 0.35);
+      --emerald: #0F9D58;
+      --emerald-light: rgba(15, 157, 88, 0.15);
+      --bg: #0b141a;
+      --surface: #111b21;
+      --surface-card: #1f2c34;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-bright: rgba(255, 255, 255, 0.18);
+      --text-main: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Outfit', sans-serif;
+      color: #ffffff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(11, 20, 26, 0.88);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+    .logo-text {
+      font-size: 20px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto 80px;
+      padding: 0 24px;
+    }
+
+    .doc-header {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-header h1 {
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .doc-header p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    .effective-tag {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--primary-light);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section p {
+      color: #cbd5e1;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    .section ul {
+      margin-left: 20px;
+      margin-bottom: 14px;
+      color: #cbd5e1;
+      font-size: 15px;
+    }
+    .section li {
+      margin-bottom: 8px;
+    }
+    .section strong {
+      color: #ffffff;
+    }
+
+    .highlight-box {
+      background: var(--surface-card);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 16px 0;
+    }
+    .highlight-box p {
+      margin-bottom: 0;
+      font-size: 14px;
+      color: #e2e8f0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: #060911;
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="organizo_mark.png" alt="Organizo Logo" class="logo-img" />
+        <span class="logo-text">Organizo</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="delete-account.html">Delete Account</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="doc-header">
+      <h1>Privacy Policy</h1>
+      <p>Your privacy and the security of your group financial data are fundamental to us.</p>
+      <div class="effective-tag">Last Updated & Effective: September 2026</div>
+    </div>
+
+    <!-- 1. Introduction -->
+    <div class="section">
+      <h2>1. Introduction</h2>
+      <p>
+        Welcome to <strong>Organizo</strong> ("we," "our," or "us"). Organizo provides mobile applications and web services designed to assist users with organizing group trips, events, coordinating shared expenses, tracking collections, and computing optimal peer-to-peer repayments.
+      </p>
+      <p>
+        This Privacy Policy explains how we collect, use, disclose, and protect your information when you access or use the Organizo mobile app and associated services at <strong>organizo.co.in</strong>. By using Organizo, you agree to the practices described in this policy.
+      </p>
+    </div>
+
+    <!-- 2. Information We Collect -->
+    <div class="section">
+      <h2>2. Information We Collect</h2>
+      <p>We collect information that you provide directly to us, as well as data gathered automatically when using the app:</p>
+      <ul>
+        <li><strong>Account & Profile Information:</strong> Full Name, Email Address, and Phone Number provided during registration or profile setup.</li>
+        <li><strong>Trip & Event Financial Data:</strong> Event names, trip itineraries, budgets, expense items, amounts, split allocations, contributor names, and settlement records logged within groups.</li>
+        <li><strong>User-Generated Media:</strong> Expense receipts, event banners, and organizer UPI payment QR codes uploaded by users.</li>
+        <li><strong>Device & Usage Data:</strong> Device model, operating system version, push notification identifiers (FCM / OneSignal Player ID), and basic diagnostic logs for troubleshooting sync issues.</li>
+      </ul>
+    </div>
+
+    <!-- 3. Device Permissions -->
+    <div class="section">
+      <h2>3. Device Permissions & Why We Need Them</h2>
+      <p>The Organizo Android application may request specific device permissions strictly to enable core features:</p>
+      <ul>
+        <li><strong>Camera (<code>android.permission.CAMERA</code>):</strong> Used to take real-time photos of paper receipts or capture UPI QR codes for event collections.</li>
+        <li><strong>Photos & Media (<code>android.permission.READ_MEDIA_IMAGES</code>):</strong> Used to attach existing receipt screenshots and UPI payment QR codes from your gallery.</li>
+        <li><strong>Push Notifications (<code>android.permission.POST_NOTIFICATIONS</code>):</strong> Used to send real-time alerts when group expenses are logged, settlements are cleared, or event organizers broadcast announcements.</li>
+        <li><strong>Internet & Network State:</strong> Used to communicate with our secure backend APIs and detect offline mode for seamless outbox queue syncing.</li>
+      </ul>
+      <div class="highlight-box">
+        <p><strong>Note:</strong> We never access your camera, media, or files without your explicit permission and action.</p>
+      </div>
+    </div>
+
+    <!-- 4. Third-Party Service Providers -->
+    <div class="section">
+      <h2>4. Third-Party Service Providers & Data Disclosures</h2>
+      <p>We work with trusted third-party service providers to power key infrastructure:</p>
+      <ul>
+        <li><strong>Razorpay:</strong> Handles secure payment processing for digital pass upgrades. Financial billing details are handled directly by Razorpay in compliance with PCI-DSS standards.</li>
+        <li><strong>OneSignal & Firebase Cloud Messaging (FCM):</strong> Manages encrypted push notification dispatch and device registration.</li>
+        <li><strong>Cloudinary:</strong> Provides secure cloud storage for uploaded receipt attachments and payment QR images.</li>
+        <li><strong>Email Services (Nodemailer / Brevo / SMTP):</strong> Dispatches 6-digit verification OTP codes for secure passwordless sign-in and email updates.</li>
+      </ul>
+      <p>We do <strong>not</strong> sell, rent, or trade your personal information to third-party data brokers or advertisers.</p>
+    </div>
+
+    <!-- 5. Data Security & Retention -->
+    <div class="section">
+      <h2>5. Data Security & Storage</h2>
+      <p>
+        All data transmitted between your device and Organizo servers is encrypted in transit using modern <strong>Transport Layer Security (TLS / HTTPS)</strong> protocols. Sensitive tokens and credentials are securely stored using token versioning and salted hashes.
+      </p>
+      <p>
+        Your data is retained for as long as your account is active to provide ongoing group history, expense records, and settlement summaries.
+      </p>
+    </div>
+
+    <!-- 6. Account & Data Deletion Rights -->
+    <div class="section">
+      <h2>6. Account & Data Deletion (Your Rights)</h2>
+      <p>
+        In accordance with Google Play Developer Policies and global privacy regulations (GDPR, DPDP Act 2023), you have the absolute right to delete your account and request data erasure at any time:
+      </p>
+      <ul>
+        <li><strong>In-App Deletion:</strong> Go to <em>My Profile &rarr; Delete Account</em> inside the Organizo app to permanently initiate account deletion.</li>
+        <li><strong>Web-Based Deletion Request:</strong> You can submit a deletion request directly on our dedicated web page at <a href="/delete-account.html" style="color: var(--primary);">organizo.co.in/delete-account.html</a> without needing to reinstall the app.</li>
+      </ul>
+      <div class="highlight-box">
+        <p>
+          <strong>Ledger Anonymization Notice:</strong> Upon deletion, your personal identity (name, email, phone, push tokens) is permanently wiped. Any past shared split expenses or contributions in group trips are anonymized as <em>"Former Member"</em> so that your friends' historical calculations and debts remain mathematically accurate.
+        </p>
+      </div>
+    </div>
+
+    <!-- 7. Contact Us -->
+    <div class="section">
+      <h2>7. Contact Information</h2>
+      <p>If you have any questions, feedback, or privacy-related requests regarding this Privacy Policy, please contact us at:</p>
+      <p>
+        <strong>Email:</strong> <a href="mailto:support@organizo.co.in" style="color: var(--primary);">support@organizo.co.in</a><br />
+        <strong>Website:</strong> <a href="https://organizo.co.in" style="color: var(--primary);">https://organizo.co.in</a>
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="delete-account.html">Delete Account</a>
+    </div>
+    <p>© 2026 Organizo App. All rights reserved. • Made with ❤️ in India</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service - Organizo</title>
+  <meta name="description" content="Terms and Conditions of Service for using Organizo." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0F9D58;
+      --primary-hover: #0b8043;
+      --primary-light: rgba(15, 157, 88, 0.12);
+      --primary-glow: rgba(15, 157, 88, 0.35);
+      --emerald: #0F9D58;
+      --emerald-light: rgba(15, 157, 88, 0.15);
+      --bg: #0b141a;
+      --surface: #111b21;
+      --surface-card: #1f2c34;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-bright: rgba(255, 255, 255, 0.18);
+      --text-main: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Outfit', sans-serif;
+      color: #ffffff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(11, 20, 26, 0.88);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+    .logo-text {
+      font-size: 20px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto 80px;
+      padding: 0 24px;
+    }
+
+    .doc-header {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-header h1 {
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .doc-header p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    .effective-tag {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--primary-light);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #ffffff;
+    }
+    .section p {
+      color: #cbd5e1;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    .section ul {
+      margin-left: 20px;
+      margin-bottom: 14px;
+      color: #cbd5e1;
+      font-size: 15px;
+    }
+    .section li {
+      margin-bottom: 8px;
+    }
+    .section strong {
+      color: #ffffff;
+    }
+
+    .highlight-box {
+      background: var(--surface-card);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 16px 0;
+    }
+    .highlight-box p {
+      margin-bottom: 0;
+      font-size: 14px;
+      color: #e2e8f0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: #060911;
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="organizo_mark.png" alt="Organizo Logo" class="logo-img" />
+        <span class="logo-text">Organizo</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="privacy-policy.html">Privacy</a></li>
+        <li><a href="delete-account.html">Delete Account</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="doc-header">
+      <h1>Terms of Service</h1>
+      <p>Terms and conditions governing your use of the Organizo mobile application and website.</p>
+      <div class="effective-tag">Last Updated: September 2026</div>
+    </div>
+
+    <!-- 1. Agreement to Terms -->
+    <div class="section">
+      <h2>1. Agreement to Terms</h2>
+      <p>
+        By downloading, installing, accessing, or using the <strong>Organizo</strong> mobile application, website (<strong>organizo.co.in</strong>), or associated services (collectively, the "Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use the Service.
+      </p>
+    </div>
+
+    <!-- 2. Nature of the Service -->
+    <div class="section">
+      <h2>2. Nature of the Service (Financial Utility Disclaimer)</h2>
+      <p>
+        Organizo is a <strong>group expense calculation, coordination, and budget tracking utility</strong>. 
+      </p>
+      <div class="highlight-box">
+        <p>
+          <strong>Important Financial Notice:</strong> Organizo is <strong>not</strong> a bank, escrow service, payment system, or money transmitter. Organizo does not hold user deposits or execute direct peer-to-peer fund transfers between users. Peer-to-peer repayments and event collections made via external payment methods (such as UPI, cash, or third-party bank apps) are strictly between the individual users involved.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. User Accounts & Registration -->
+    <div class="section">
+      <h2>3. User Accounts & Security</h2>
+      <p>To use certain features, you must create an account by providing accurate contact details (such as a valid phone number and email address). You are responsible for:</p>
+      <ul>
+        <li>Maintaining the confidentiality of your account credentials and verification OTPs.</li>
+        <li>All activities that occur under your account.</li>
+        <li>Promptly notifying us if you suspect any unauthorized access or security breach.</li>
+      </ul>
+    </div>
+
+    <!-- 4. Digital Passes & Payments -->
+    <div class="section">
+      <h2>4. Optional Digital Passes & Upgrades</h2>
+      <p>
+        Organizo offers optional per-entity feature passes (e.g., Standard Pass, Pro Pass) that unlock enhanced software capabilities, such as higher member limits, custom QR uploads, or push broadcast announcements.
+      </p>
+      <ul>
+        <li>All pass pricing is displayed in Indian Rupees (INR) or local currency prior to purchase.</li>
+        <li>Payments are processed securely via certified payment gateways (e.g., Razorpay).</li>
+        <li>Once an entity pass is purchased and the digital feature is unlocked, payments are generally non-refundable unless required by applicable law.</li>
+      </ul>
+    </div>
+
+    <!-- 5. User Conduct & Content -->
+    <div class="section">
+      <h2>5. User Conduct & Content Standards</h2>
+      <p>When using Organizo, you agree NOT to:</p>
+      <ul>
+        <li>Upload fraudulent, abusive, defamatory, or obscene content, receipts, or QR images.</li>
+        <li>Engage in harassment, spamming announcements, or attempting to mislead group participants.</li>
+        <li>Attempt to reverse-engineer, decompile, or compromise the security and stability of our API servers.</li>
+      </ul>
+    </div>
+
+    <!-- 6. Account Deletion & Termination -->
+    <div class="section">
+      <h2>6. Account Termination & Deletion</h2>
+      <p>
+        You may delete your account at any time directly through the app (<em>My Profile &rarr; Delete Account</em>) or via our public web deletion page. Upon deletion, personal credentials are permanently wiped, and past ledger entries in shared groups are anonymized.
+      </p>
+      <p>
+        We reserve the right to suspend or terminate accounts that violate these Terms or engage in fraudulent activities.
+      </p>
+    </div>
+
+    <!-- 7. Limitation of Liability -->
+    <div class="section">
+      <h2>7. Limitation of Liability</h2>
+      <p>
+        To the maximum extent permitted by law, Organizo and its operators shall not be liable for any indirect, incidental, or consequential damages arising from:
+      </p>
+      <ul>
+        <li>Mathematical disputes, debt disagreements, or unpaid balances between group members.</li>
+        <li>Temporary service interruptions, sync delays, or network outages.</li>
+        <li>Loss of data due to user-initiated account deletions.</li>
+      </ul>
+    </div>
+
+    <!-- 8. Governing Law & Contact -->
+    <div class="section">
+      <h2>8. Governing Law & Contact</h2>
+      <p>These Terms shall be governed by and construed in accordance with the laws of India.</p>
+      <p>
+        For inquiries regarding these Terms, contact us at: <strong><a href="mailto:support@organizo.co.in" style="color: var(--primary);">support@organizo.co.in</a></strong>
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="delete-account.html">Delete Account</a>
+    </div>
+    <p>© 2026 Organizo App. All rights reserved. • Made with ❤️ in India</p>
+  </footer>
+
+</body>
+</html>

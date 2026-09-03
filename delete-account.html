@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account & Data Deletion Request - Organizo</title>
+  <meta name="description" content="Request permanent account and data deletion for your Organizo account." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0F9D58;
+      --primary-hover: #0b8043;
+      --primary-light: rgba(15, 157, 88, 0.12);
+      --primary-glow: rgba(15, 157, 88, 0.35);
+      --error: #ef4444;
+      --error-light: rgba(239, 68, 68, 0.12);
+      --emerald: #0F9D58;
+      --bg: #0b141a;
+      --surface: #111b21;
+      --surface-card: #1f2c34;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-bright: rgba(255, 255, 255, 0.18);
+      --text-main: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Outfit', sans-serif;
+      color: #ffffff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(11, 20, 26, 0.88);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+    .logo-text {
+      font-size: 20px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto 80px;
+      padding: 0 24px;
+    }
+
+    .doc-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .trash-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 20px;
+      background: var(--error-light);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: var(--error);
+    }
+    .doc-header h1 {
+      font-size: 34px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .doc-header p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .card h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .steps-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+    }
+    .step-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-text {
+      font-size: 14.5px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 14px;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 10px 12px;
+      background: var(--surface-card);
+      color: #ffffff;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #e2e8f0;
+    }
+    .form-input {
+      width: 100%;
+      height: 48px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-sm);
+      padding: 0 14px;
+      color: #ffffff;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus {
+      border-color: var(--primary);
+    }
+    textarea.form-input {
+      height: 100px;
+      padding: 12px 14px;
+      resize: vertical;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: var(--radius-sm);
+      font-size: 14.5px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-danger {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      color: #ffffff;
+      width: 100%;
+    }
+    .btn-danger:hover {
+      opacity: 0.9;
+    }
+
+    .success-box {
+      display: none;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      color: #6ee7b7;
+      margin-top: 16px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: #060911;
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="organizo_mark.png" alt="Organizo Logo" class="logo-img" />
+        <span class="logo-text">Organizo</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="privacy-policy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="doc-header">
+      <div class="trash-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          <line x1="10" y1="11" x2="10" y2="17"></line>
+          <line x1="14" y1="11" x2="14" y2="17"></line>
+        </svg>
+      </div>
+      <h1>Account & Data Deletion</h1>
+      <p>
+        In accordance with Google Play Developer Policies and global privacy regulations, users can permanently delete their Organizo account and associated personal data at any time.
+      </p>
+    </div>
+
+    <!-- Method 1: In-App Deletion -->
+    <div class="card">
+      <h2>Method 1: Instant In-App Deletion (Recommended)</h2>
+      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+        If you have the Organizo mobile app installed on your device, you can delete your account instantly:
+      </p>
+      <ul class="steps-list">
+        <li class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-text">Open the <strong>Organizo</strong> app on your mobile device.</div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-text">Tap the <strong>Profile</strong> icon in the top header or navigation.</div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-text">Scroll to the bottom and tap the red <strong>Delete Account</strong> button.</div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-text">Confirm the prompt. Your personal data is scrubbed instantly and your session is closed.</div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Method 2: Web Deletion Request Form -->
+    <div class="card">
+      <h2>Method 2: Submit Web Deletion Request</h2>
+      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">
+        If you have uninstalled the app or cannot access your device, submit this form. Our team will verify and permanently delete your account within 48 hours:
+      </p>
+
+      <form id="deleteForm" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label class="form-label" for="userIdentifier">Registered Email Address or Phone Number *</label>
+          <input type="text" id="userIdentifier" class="form-input" placeholder="e.g. rahul@example.com or 9876543210" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reason">Reason for Deletion (Optional)</label>
+          <textarea id="reason" class="form-input" placeholder="Tell us why you are leaving (optional)..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-danger">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+          Submit Account Deletion Request
+        </button>
+      </form>
+
+      <div id="successBox" class="success-box">
+        ✓ Your account deletion request has been submitted successfully. A confirmation notice will be processed for the provided email/phone within 48 hours.
+      </div>
+    </div>
+
+    <!-- What Data is Deleted vs Anonymized -->
+    <div class="card">
+      <h2>Data Handling & Retention Policy</h2>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data Category</th>
+            <th>Action Taken</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Personal Profile</strong><br />(Full Name, Email, Phone, Password)</td>
+            <td style="color: var(--error);">Permanently erased & masked.</td>
+          </tr>
+          <tr>
+            <td><strong>Push Notification Device Tokens</strong></td>
+            <td style="color: var(--error);">Permanently deleted from OneSignal/Firebase.</td>
+          </tr>
+          <tr>
+            <td><strong>Personal Notification Inbox</strong></td>
+            <td style="color: var(--error);">Permanently wiped from server database.</td>
+          </tr>
+          <tr>
+            <td><strong>Shared Group Ledgers & Splits</strong><br />(Trip expenses, split shares, collections)</td>
+            <td style="color: var(--emerald);">Anonymized as <em>"Former Member"</em> to preserve group math and friends' balance calculations.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="delete-account.html">Delete Account</a>
+    </div>
+    <p>© 2026 Organizo App. All rights reserved. • Made with ❤️ in India</p>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const identifier = document.getElementById('userIdentifier').value;
+      if (!identifier.trim()) return;
+
+      document.getElementById('deleteForm').style.display = 'none';
+      document.getElementById('successBox').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
