@@ -103,19 +103,20 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 40px auto 80px;
       padding: 0 24px;
     }
 
     .doc-header {
-      text-align: center;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
     }
     .trash-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
       background: var(--error-light);
       display: inline-flex;
       align-items: center;
@@ -124,15 +125,16 @@
       color: var(--error);
     }
     .doc-header h1 {
-      font-size: 34px;
+      font-size: 40px;
       font-weight: 800;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
     }
     .doc-header p {
       color: var(--text-secondary);
       font-size: 15px;
-      max-width: 600px;
-      margin: 0 auto;
+      max-width: 700px;
+      margin: 0;
     }
 
     .card {
@@ -355,8 +357,8 @@
       <div id="step1Container">
         <form id="requestOtpForm" onsubmit="handleRequestOtp(event)">
           <div class="form-group">
-            <label class="form-label" for="userIdentifier">Registered Email Address or 10-Digit Mobile Number *</label>
-            <input type="text" id="userIdentifier" class="form-input" placeholder="e.g. rahul@example.com or 9876543210" required />
+            <label class="form-label" for="userEmail">Registered Email Address *</label>
+            <input type="email" id="userEmail" class="form-input" placeholder="e.g. rahul@example.com" required />
           </div>
 
           <div class="form-group">
@@ -376,7 +378,7 @@
       <!-- Step 2: Verify OTP & Execute Deletion -->
       <div id="step2Container" style="display: none;">
         <div style="background: rgba(15, 157, 88, 0.1); border: 1px solid rgba(15, 157, 88, 0.3); border-radius: 12px; padding: 14px; margin-bottom: 18px; font-size: 13px; color: #d1fae5;">
-          <strong style="color: #ffffff;">Verification Code Sent:</strong> We sent a 6-digit OTP to your registered email/phone. Please enter it below to confirm permanent deletion.
+          <strong style="color: #ffffff;">Verification Code Sent:</strong> We sent a 6-digit OTP to your registered email address. Please enter it below to confirm permanent deletion.
         </div>
 
         <form id="verifyOtpForm" onsubmit="handleVerifyAndDelete(event)">
@@ -437,6 +439,23 @@
         </tbody>
       </table>
     </div>
+
+    <!-- Frequently Asked Questions -->
+    <div class="card">
+      <h2>Frequently Asked Questions</h2>
+      <div style="margin-bottom: 18px;">
+        <h3 style="font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Can I recover my account once deleted?</h3>
+        <p style="color: var(--text-secondary); font-size: 14px;">
+          No. Account deletion is permanent and cannot be reversed. If you want to use Organizo again in the future, you will need to sign up as a new user.
+        </p>
+      </div>
+      <div>
+        <h3 style="font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">What if I am an organizer of active events?</h3>
+        <p style="color: var(--text-secondary); font-size: 14px;">
+          Before deleting your account, ensure all pending participant claims are approved or rejected, and settle any outstanding debts to avoid leaving incomplete ledger states for other members.
+        </p>
+      </div>
+    </div>
   </main>
 
   <footer>
@@ -450,34 +469,47 @@
   </footer>
 
   <script>
-    let currentIdentifier = '';
+    let currentEmail = '';
     let currentReason = '';
+
+    const API_BASE = 'https://api.organizo.co.in';
+
+    // Standard RFC-compliant email validation regex
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
 
     async function handleRequestOtp(e) {
       e.preventDefault();
-      const identifierInput = document.getElementById('userIdentifier').value.trim();
+      const emailInput = document.getElementById('userEmail').value.trim();
       currentReason = document.getElementById('reason').value.trim();
       const errEl = document.getElementById('step1Error');
       const btn = document.getElementById('btnRequestOtp');
 
-      if (!identifierInput) return;
-      currentIdentifier = identifierInput;
+      if (!emailInput) {
+        errEl.innerText = 'Please enter your registered email address.';
+        errEl.style.display = 'block';
+        return;
+      }
 
+      if (!isValidEmail(emailInput)) {
+        errEl.innerText = 'Please enter a valid email address (e.g. name@example.com).';
+        errEl.style.display = 'block';
+        return;
+      }
+
+      currentEmail = emailInput.toLowerCase();
       errEl.style.display = 'none';
       btn.disabled = true;
       btn.innerText = 'Sending OTP...';
 
       try {
-        const payload = {};
-        if (identifierInput.includes('@')) {
-          payload.email = identifierInput.toLowerCase();
-          payload.identifier = identifierInput.toLowerCase();
-        } else {
-          payload.number = Number(identifierInput.replace(/\\D/g, '')) || identifierInput;
-          payload.identifier = identifierInput;
-        }
+        const payload = {
+          email: currentEmail,
+          identifier: currentEmail
+        };
 
-        const res = await fetch('/api/auth/requestOtp', {
+        const res = await fetch(`${API_BASE}/api/auth/requestOtp`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -491,7 +523,7 @@
         document.getElementById('step1Container').style.display = 'none';
         document.getElementById('step2Container').style.display = 'block';
       } catch (err) {
-        errEl.innerText = err.message || 'Error sending OTP. Please check your email or phone number.';
+        errEl.innerText = err.message || 'Error sending OTP. Please check your email address.';
         errEl.style.display = 'block';
       } finally {
         btn.disabled = false;
@@ -511,17 +543,14 @@
       btn.innerText = 'Verifying & Deleting...';
 
       try {
-        const payload = { otp };
-        if (currentIdentifier.includes('@')) {
-          payload.email = currentIdentifier.toLowerCase();
-          payload.identifier = currentIdentifier.toLowerCase();
-        } else {
-          payload.number = Number(currentIdentifier.replace(/\\D/g, '')) || currentIdentifier;
-          payload.identifier = currentIdentifier;
-        }
+        const payload = {
+          otp,
+          email: currentEmail,
+          identifier: currentEmail
+        };
 
-        // 1. Validate OTP (same as mobile app)
-        const validateRes = await fetch('/api/auth/validateOtp', {
+        // 1. Validate OTP
+        const validateRes = await fetch(`${API_BASE}/api/auth/validateOtp`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -535,7 +564,7 @@
         const token = validateData.token;
 
         // 2. Execute Account Deletion (same as mobile app)
-        const deleteRes = await fetch('/api/user/account', {
+        const deleteRes = await fetch(`${API_BASE}/api/user/account`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

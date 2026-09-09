@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organizo API Gateway</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0F9D58;
+      --primary-hover: #0b8043;
+      --primary-glow: rgba(15, 157, 88, 0.25);
+      --bg: #0b141a;
+      --surface: #111b21;
+      --surface-card: #1f2c34;
+      --surface-hover: #26353e;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-bright: rgba(15, 157, 88, 0.4);
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --code-bg: #060b0e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+
+    /* Subtle background grid */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    .glow-orb {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+      pointer-events: none;
+      filter: blur(80px);
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      z-index: 10;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0F9D58, #128C7E);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: #fff;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .brand h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .brand p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .badge-env {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(15, 157, 88, 0.12);
+      border: 1px solid rgba(15, 157, 88, 0.3);
+      color: #34d399;
+    }
+
+    .badge-env .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .status-box {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .status-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .status-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .status-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 14px var(--primary-glow);
+      border: 1px solid transparent;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--surface-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-bright);
+      transform: translateY(-1px);
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .endpoints-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .endpoint-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
+    .endpoint-path {
+      font-family: 'JetBrains Mono', monospace;
+      color: #38bdf8;
+      font-weight: 500;
+    }
+
+    .endpoint-desc {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .footer a:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 540px) {
+      .card { padding: 24px 20px; }
+      .actions { grid-template-columns: 1fr; }
+      .status-box { flex-direction: column; gap: 12px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="glow-orb"></div>
+
+  <div class="card">
+    <div class="header">
+      <div class="brand">
+        <div class="logo-badge">O</div>
+        <div>
+          <h1>Organizo API</h1>
+          <p>RESTful Backend Gateway</p>
+        </div>
+      </div>
+      <div class="badge-env" id="envBadge">
+        <div class="pulse"></div>
+        <span id="envText">Loading...</span>
+      </div>
+    </div>
+
+    <div class="status-box">
+      <div class="status-item">
+        <span class="status-label">Database</span>
+        <span class="status-value" id="dbStatus">PostgreSQL (Prisma)</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">System Status</span>
+        <span class="status-value" id="systemStatus" style="display: inline-flex; align-items: center; gap: 6px; color: #34d399;">
+          <span id="statusDot" style="width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+          <span id="statusText">Checking...</span>
+        </span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Version</span>
+        <span class="status-value">v1.0.0</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="/api-docs" class="btn btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        Swagger API Docs
+      </a>
+      <a href="/api/health" class="btn btn-secondary" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+        Health Check
+      </a>
+    </div>
+
+    <div class="section-title">Core API Domains</div>
+    <div class="endpoints-list">
+      <div class="endpoint-item">
+        <span class="endpoint-path">/api/auth</span>
+        <span class="endpoint-desc">OTP Verification, Profile & Sessions</span>
+      </div>
+      <div class="endpoint-item">
+        <span class="endpoint-path">/api/event</span>
+        <span class="endpoint-desc">Events, Expenses, Activities & Broadcasts</span>
+      </div>
+      <div class="endpoint-item">
+        <span class="endpoint-path">/api/trip</span>
+        <span class="endpoint-desc">Trips, Expense Splits & Debt Settlements</span>
+      </div>
+      <div class="endpoint-item">
+        <span class="endpoint-path">/api/plan</span>
+        <span class="endpoint-desc">Feature Entitlements & Pricing Plans</span>
+      </div>
+      <div class="endpoint-item">
+        <span class="endpoint-path">/api/notification</span>
+        <span class="endpoint-desc">In-App & Push Notifications</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Organizo Backend Services</span>
+      <div>
+        <a href="https://organizo.co.in" target="_blank">Main Website &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    fetch('/api/system/status')
+      .then(res => res.json())
+      .then(data => {
+        const isProd = data.environment === 'production' || data.schema === 'prod';
+        const badge = document.getElementById('envBadge');
+        const text = document.getElementById('envText');
+        text.innerText = isProd ? 'Production API' : 'Development API';
+        if (!isProd) {
+          badge.style.background = 'rgba(245, 158, 11, 0.15)';
+          badge.style.borderColor = 'rgba(245, 158, 11, 0.35)';
+          badge.style.color = '#fbbf24';
+          badge.querySelector('.pulse').style.background = '#f59e0b';
+          badge.querySelector('.pulse').style.boxShadow = '0 0 8px #f59e0b';
+        }
+        if (data.schema) {
+          document.getElementById('dbStatus').innerText = 'PostgreSQL (' + data.schema.toUpperCase() + ')';
+        }
+        const statusText = document.getElementById('statusText');
+        const statusDot = document.getElementById('statusDot');
+        if (data.status === 'healthy' && data.database && data.database.status === 'connected') {
+          statusText.innerText = 'Operational (' + data.database.latency + ')';
+          statusText.parentElement.style.color = '#34d399';
+          statusDot.style.background = '#10b981';
+        } else {
+          statusText.innerText = 'Degraded';
+          statusText.parentElement.style.color = '#f87171';
+          statusDot.style.background = '#ef4444';
+        }
+      })
+      .catch(() => {
+        document.getElementById('envText').innerText = 'Online';
+        const statusText = document.getElementById('statusText');
+        const statusDot = document.getElementById('statusDot');
+        if (statusText) statusText.innerText = 'Service Unreachable';
+        if (statusDot) statusDot.style.background = '#ef4444';
+      });
+  </script>
+</body>
+</html>
