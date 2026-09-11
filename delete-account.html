@@ -361,11 +361,6 @@
             <input type="email" id="userEmail" class="form-input" placeholder="e.g. rahul@example.com" required />
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="reason">Reason for Deletion (Optional)</label>
-            <textarea id="reason" class="form-input" placeholder="Tell us why you are leaving (optional)..." rows="2"></textarea>
-          </div>
-
           <div id="step1Error" style="display: none; color: #f87171; font-size: 13px; margin-bottom: 12px; font-weight: 500;"></div>
 
           <button type="submit" id="btnRequestOtp" class="btn btn-danger">
@@ -470,7 +465,6 @@
 
   <script>
     let currentEmail = '';
-    let currentReason = '';
 
     const API_BASE = 'https://api.organizo.co.in';
 
@@ -482,7 +476,6 @@
     async function handleRequestOtp(e) {
       e.preventDefault();
       const emailInput = document.getElementById('userEmail').value.trim();
-      currentReason = document.getElementById('reason').value.trim();
       const errEl = document.getElementById('step1Error');
       const btn = document.getElementById('btnRequestOtp');
 
@@ -506,7 +499,8 @@
       try {
         const payload = {
           email: currentEmail,
-          identifier: currentEmail
+          identifier: currentEmail,
+          purpose: 'DELETE_ACCOUNT'
         };
 
         const res = await fetch(`${API_BASE}/api/auth/requestOtp`, {
@@ -570,7 +564,7 @@
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
           },
-          body: JSON.stringify({ reason: currentReason })
+          body: JSON.stringify({ otp })
         });
 
         const deleteData = await deleteRes.json();
